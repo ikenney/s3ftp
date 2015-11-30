@@ -51,8 +51,8 @@ Create an access key for this user, make sure you have the access key and secret
 
 Clone this repo
 
-    git clone reponame
-    cd reponame
+    git clone https://github.com/ikenney/s3ftp.git
+    cd s3ftp
 
 create a certificate
     
@@ -110,6 +110,7 @@ if you have make installed, you can use the following:
 
 - make build - build the docker image
 - make - run the docker container (requires .env - see below)
+- make ssl - generate a self signed certificate
 
 make will source a file in the current directory called `.env` use this to export the environement variables described above e.g:
 
