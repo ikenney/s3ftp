@@ -1,0 +1,7 @@
+#!/bin/bash
+#usage mount-s3 username
+passwd=/etc/passwd-s3fs
+echo "${AWS_ACCESS_KEY_ID}:${AWS_SECRET_ACCESS_KEY}" > $passwd
+chmod 600 $passwd
+mkdir /s3data/$1
+/usr/local/bin/s3fs ${AWS_BUCKET}-$1 /s3data/$1 -o passwd_file=$passwd -o allow_other -o endpoint=${AWS_REGION}

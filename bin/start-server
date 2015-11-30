@@ -1,0 +1,13 @@
+#!/bin/bash
+/bin/add-users
+
+default_ip=$(tail -1 /etc/hosts|cut -f1)
+ip=${FTP_IP:-$default_ip}
+
+echo "pasv_address=$ip" >> /etc/vsftpd.conf
+
+
+vsftpd &
+logger -s -t "vsftpd" "Starting ftp service on $ip" >>  /var/log/vsftpd.log
+
+tail -f /var/log/vsftpd.log

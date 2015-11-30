@@ -1,0 +1,12 @@
+#!/bin/bash
+# usage - 
+# FTP_USER=user1:passwd1,user2:passwd2 add_user
+for entry in $(echo $FTP_USER|tr "," "\n")
+do
+  user=$(echo $entry|cut -f 1 -d":")
+  passwd=$(echo $entry|cut -f 2 -d":")
+  /usr/sbin/useradd $user -d /s3data/${user} -s /usr/sbin/nologin
+  echo "$user:$passwd" | /usr/sbin/chpasswd 
+  echo $user >> /etc/vsftpd_users
+  mount-s3 $user
+done
